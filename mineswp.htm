@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled 1</title>
+    <style>
+        body {
+            background-color: #999;
+        }
+        td {
+            height: 50px;
+            width: 44px;
+            font-size: 30px;
+            font-family: 'Minion Pro','Frutiger';
+            font-weight: 600;
+            border: #333 solid 2px;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+        span {
+            cursor: pointer;
+        }
+        .unknown {
+            background-color: aquamarine;
+        }
+        .known {
+            background-color: white;
+        }
+        .flagged {
+            background-color: yellow;
+            color: red;
+        }
+        .burn {
+            background-color: red;
+        }
+        .a_1{
+            color: cornflowerblue;
+        }
+        .a_2{
+            color: springgreen;
+        }
+        .a_3{
+            color: fuchsia;
+        }
+        .a_4{
+            color: deeppink;
+        }
+        .a_5{
+            color: darkblue;
+        }
+        .a_6{
+            color: forestgreen;
+        }
+        .a_7{
+            color: blueviolet;
+        }
+        .a_8{
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div>Minesweeper : <span id="ca"></span> | Currently in mode <span id="bp" onclick="bq()">[DIG]</span>. Flags left: <span id="bv">0</span>.</div>
+    <div><table id="a"></table></div>
+    <script>
+        var ab,ac,ag,q=!0,bb=!0,r=[],bd=[],bf=!1,br=[],bw=0;b=c=>document.getElementById(c),d=function(e,f){b(e).innerHTML=f},g=function(h,i,j){b(h).setAttribute(i,j)},k=function(l,m,ah){ab=l,ac=m,ag=ah,q=!0,bb=!0,r=[],bd=[],bf=!1,br=[];var n='';d('bv',ag);for(var o=0;o<l;o++){n+='<tr>';var s=[],be=[];for(var p=0;p<m;p++){n+=`<td id="aa${o}_${p}" class="unknown" onclick="bg(${o},${p})" ondblclick="bj(${o},${p})"></td>`;s=s.concat(0);be=be.concat(!0)}r=r.concat([s]);bd=bd.concat([be]);br=br.concat([s]);n+='</tr>'}d('a',n);d('bp','[DIG]')},t=function(u,v,w,$,_){var x=[],z=[];for(var y=0;y<w;y++)x=x.concat(1);for(var y=w;y<u*v-1;y++)x=x.concat(0);for(var y=0;y<u*v-1;y++){z=z.concat(x[Math.floor(Math.random()*(u*v-1-y))]);x=x.splice(z[y])}z=z.slice(0,$*v+_).concat(0,z.slice($*v+_,u*v));for(var y=0;y<u;y++)r[y]=z.slice(y*v,(y+1)*v)},ad=function(ae,af){q&&(q=!1,t(ab,ac,ag,ae,af));ai(ae,af)},bq=function(){bf=!bf;bf?d('bp','[FLAG]'):d('bp','[DIG]')},ai=function(aj,ak){bb&&(br[aj][ak]?(br[aj][ak]=0,d(`aa${aj}_${ak}`,''),d('bv',++ag),g(`aa${aj}_${ak}`,'class','unknown')):(r[aj][ak]?al(aj,ak):av(aj,ak)))},al=function(am,an){bd[am][an]=!1,d(`aa${am}_${an}`,'X');g(`aa${am}_${an}`,'class','burn');bb=!1;d('bp','[OUT!]');--bw;setTimeout('b_()',5000)},cd=(ce,cf)=>(ce<0||ce>=ab||cf<0||cf>=ac)?!1:bd[ce][cf];ao=(aq,ar)=>as(aq-1,ar-1)+as(aq-1,ar)+as(aq-1,ar+1)+as(aq,ar-1)+as(aq,ar+1)+as(aq+1,ar-1)+as(aq+1,ar)+as(aq+1,ar+1),as=(at,au)=>(at<0||at>=ab||au<0||au>=ac)?0:r[at][au],av=function(aw,ax){var ay=ao(aw,ax);bs(aw,ax)||(cd(aw,ax)&&(bd[aw][ax]=!1,ay?(d(`aa${aw}_${ax}`,ay),g(`aa${aw}_${ax}`,'class',`known a_${ay}`)):(g(`aa${aw}_${ax}`,'class','known'),az(aw-1,ax-1),az(aw-1,ax),az(aw-1,ax+1),az(aw,ax-1),az(aw,ax+1),az(aw+1,ax-1),az(aw+1,ax),az(aw+1,ax+1))))},az=function(a$,ba){a$<0||a$>=ab||ba<0||ba>=ac||av(a$,ba)},ap=function(bb,bc){d('bv',--ag);d(`aa${bb}_${bc}`,'!!');g(`aa${bb}_${bc}`,'class','flagged');br[bb][bc]=1;r.toString()==br.toString()&&(d('bp','[CLEAR]'),setTimeout('b_()',5000))},bg=function(bh,bi){bf?(bd[bh][bi]&&ap(bh,bi)):ad(bh,bi)},bj=function(bk,bl){bd[bk][bl]?bg(bk,bl):bm(bk,bl)},bm=function(bn,bo){[bs(bn-1,bo-1),bs(bn-1,bo),bs(bn-1,bo+1),bs(bn,bo-1),bs(bn,bo+1),bs(bn+1,bo-1),bs(bn+1,bo),bs(bn+1,bo+1)].toString()==[as(bn-1,bo-1),as(bn-1,bo),as(bn-1,bo+1),as(bn,bo-1),as(bn,bo+1),as(bn+1,bo-1),as(bn+1,bo),as(bn+1,bo+1)].toString()&&(av(bn-1,bo-1),av(bn-1,bo),av(bn-1,bo+1),av(bn,bo-1),av(bn,bo+1),av(bn+1,bo-1),av(bn+1,bo),av(bn+1,bo+1))},bs=(bt,bu)=>(bt<0||bt>=ab||bu<0||bu>=ac)?0:br[bt][bu],bx=by=>by<3?((by+3)*(by+3)):(by-1)*20,bz=b$=>b$<3?[10,40,100][b$]:((b$-2)*(b$-2)*400-50),b_=function(){k(bx(bw),bx(bw),bz(bw));d('ca',cb(bw));g('a','width',50*bx(bw)+"px");bw++},cb=cc=>cc<11?['Easy','Intermediate','Hard','Very hard','Extra hard','So hard that your brain breaks down','crazy','Extremely hard','Impossible for fools like you to solve','Impossible for even experts to solve','If you are seeing this, you should know better than to continue solving'][cc]:`Level ${cc-10}`;b_();
+    </script>
+</body>
+</html>
