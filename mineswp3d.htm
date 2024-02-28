@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled 1</title>
+    <style>
+        body {
+            background-color: #999;
+        }
+        td {
+            height: 50px;
+            width: 44px;
+            font-size: 30px;
+            font-family: 'Minion Pro','Frutiger';
+            font-weight: 600;
+            border: #333 solid 2px;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+        span {
+            cursor: pointer;
+        }
+        .unknown {
+            background-color: aquamarine;
+        }
+        .known {
+            background-color: white;
+        }
+        .flagged {
+            background-color: yellow;
+            color: red;
+        }
+        .burn {
+            background-color: red;
+        }
+        .a_1{
+            color: cornflowerblue;
+        }
+        .a_2{
+            color: springgreen;
+        }
+        .a_3{
+            color: fuchsia;
+        }
+        .a_4{
+            color: deeppink;
+        }
+        .a_5{
+            color: darkblue;
+        }
+        .a_6{
+            color: forestgreen;
+        }
+        .a_7{
+            color: blueviolet;
+        }
+        .a_8{
+            color: orangered;
+        }
+        .a_9{
+            color: cadetblue;
+        }
+        .a_10{
+            color: chartreuse;
+        }
+        .a_11{
+            color: indigo;
+        }
+        .a_12{
+            color: brown;
+        }
+        .a_13{
+            color: silver;
+        }
+        .a_14{
+            color: darkcyan;
+        }
+        .a_15{
+            color: limegreen;
+        }
+        .a_16{
+            color: rebeccapurple;
+        }
+        .a_17{
+            color: crimson;
+        }
+        .a_18{
+            color: deepskyblue;
+        }
+        .a_19{
+            color: olivedrab;
+        }
+        .a_20{
+            color: mediumpurple;
+        }
+        .a_21{
+            color: tomato;
+        }
+        .a_22{
+            color: dodgerblue;
+        }
+        .a_23{
+            color: seagreen;
+        }
+        .a_24{
+            color: mediumvioletred;
+        }
+        .a_25{
+            color: maroon;
+        }
+        .a_26{
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div>Minesweeper : <span id="ca"></span> | Currently in mode <span id="bp" onclick="bq()">[DIG]</span>. Flags left: <span id="bv">0</span>.</div>
+    <div id="cj"></div>
+    <div>Current Floor: #<span id="dh">0</span></div>
+    <div>Elevator : <input type="button" value="▲" onclick="df()"><input type="button" value="▼" onclick="dg()"></div>
+    <script>
+        var ab,ac,cg,ag,de=0,
+        q=!0,bb=!0,r=[],bd=[],bf=!1,br=[],bw=0;b=c=>document.getElementById(c),d=function(e,f){b(e).innerHTML=f},g=function(h,i,j){b(h).setAttribute(i,j)},
+        k=function(l,m,ch,ah){ab=l,ac=m,cg=ch,ag=ah,q=!0,bb=!0,r=[],bd=[],bf=!1,br=[];var ci='';for(var o=0;o<ch;o++)ci+=`<table id="a${o}" style="display:none;"></table>`;d('cj',ci);d('bv',ag);for(var ck=0;ck<ch;ck++){var n='',cl=[],cm=[],di=[];for(var o=0;o<l;o++){n+='<tr>';var s=[],be=[];for(var p=0;p<m;p++){n+=`<td id="aa${ck}_${o}_${p}" class="unknown" onclick="bg(${ck},${o},${p})" ondblclick="bj(${ck},${o},${p})"></td>`;s=s.concat(0);be=be.concat(!0)}cl=cl.concat([s]);cm=cm.concat([be]);di=di.concat([s]);n+='</tr>'}r=r.concat([cl]);bd=bd.concat([cm]);br=br.concat([di]);d('a'+ck,n)}d('bp','[DIG]')},
+        t=function(u,v,cn,w,co,$,_){var x=[],z=[];for(var y=0;y<w;y++)x=x.concat(1);for(var y=w;y<u*v*cn-1;y++)x=x.concat(0);for(var y=0;y<u*v*cn-1;y++){z=z.concat(x[Math.floor(Math.random()*(u*v*cn-1-y))]);x=x.splice(z[y])}z=z.slice(0,co*u*v+$*v+_).concat(0,z.slice(co*u*v+$*v+_,u*v*cn));for(var cp=0;cp<cn;cp++)for(var y=0;y<u;y++)r[cp][y]=z.slice(cp*u*v+y*v,(cp*u+y+1)*v)},
+        ad=function(cq,ae,af){q&&(q=!1,t(ab,ac,cg,ag,cq,ae,af));ai(cq,ae,af)},bq=function(){bf=!bf;bf?d('bp','[FLAG]'):d('bp','[DIG]')},
+        ai=function(cr,aj,ak){bb&&(br[cr][aj][ak]?(br[cr][aj][ak]=0,d(`aa${cr}_${aj}_${ak}`,''),d('bv',++ag),g(`aa${cr}_${aj}_${ak}`,'class','unknown')):(r[cr][aj][ak]?al(cr,aj,ak):av(cr,aj,ak)))},
+        al=function(cs,am,an){bd[cs][am][an]=!1,d(`aa${cs}_${am}_${an}`,'X');g(`aa${cs}_${am}_${an}`,'class','burn');bb=!1;d('bp','[OUT!]');--bw;setTimeout('b_()',5000)},
+        cd=(ct,ce,cf)=>(ce<0||ce>=ab||cf<0||cf>=ac||ct<0||ct>=cg)?!1:bd[ct][ce][cf],
+        ao=(cu,aq,ar)=>as(cu-1,aq-1,ar-1)+as(cu-1,aq-1,ar)+as(cu-1,aq-1,ar+1)+as(cu-1,aq,ar-1)+as(cu-1,aq,ar)+as(cu-1,aq,ar+1)+as(cu-1,aq+1,ar-1)+as(cu-1,aq+1,ar)+as(cu-1,aq+1,ar+1)+as(cu,aq-1,ar-1)+as(cu,aq-1,ar)+as(cu,aq-1,ar+1)+as(cu,aq,ar-1)+as(cu,aq,ar+1)+as(cu,aq+1,ar-1)+as(cu,aq+1,ar)+as(cu,aq+1,ar+1)+as(cu+1,aq-1,ar-1)+as(cu+1,aq-1,ar)+as(cu+1,aq-1,ar+1)+as(cu+1,aq,ar-1)+as(cu+1,aq,ar)+as(cu+1,aq,ar+1)+as(cu+1,aq+1,ar-1)+as(cu+1,aq+1,ar)+as(cu+1,aq+1,ar+1),
+        as=(cv,at,au)=>(at<0||at>=ab||au<0||au>=ac||cv<0||cv>=cg)?0:r[cv][at][au],
+        av=function(cw,aw,ax){var ay=ao(cw,aw,ax);bs(cw,aw,ax)||(cd(cw,aw,ax)&&(bd[cw][aw][ax]=!1,ay?(d(`aa${cw}_${aw}_${ax}`,ay),g(`aa${cw}_${aw}_${ax}`,'class',`known a_${ay}`)):(g(`aa${cw}_${aw}_${ax}`,'class','known'),az(cw-1,aw-1,ax-1),az(cw-1,aw-1,ax),az(cw-1,aw-1,ax+1),az(cw-1,aw,ax-1),az(cw-1,aw,ax),az(cw-1,aw,ax+1),az(cw-1,aw+1,ax-1),az(cw-1,aw+1,ax),az(cw-1,aw+1,ax+1),az(cw,aw-1,ax-1),az(cw,aw-1,ax),az(cw,aw-1,ax+1),az(cw,aw,ax-1),az(cw,aw,ax+1),az(cw,aw+1,ax-1),az(cw,aw+1,ax),az(cw,aw+1,ax+1),az(cw+1,aw-1,ax-1),az(cw+1,aw-1,ax),az(cw+1,aw-1,ax+1),az(cw+1,aw,ax-1),az(cw+1,aw,ax),az(cw+1,aw,ax+1),az(cw+1,aw+1,ax-1),az(cw+1,aw+1,ax),az(cw+1,aw+1,ax+1))))},
+        az=function(cx,a$,ba){a$<0||a$>=ab||ba<0||ba>=ac||cx<0||cx>=cg||av(cx,a$,ba)},
+        ap=function(cy,bb,bc){d('bv',--ag);d(`aa${cy}_${bb}_${bc}`,'!!');g(`aa${cy}_${bb}_${bc}`,'class','flagged');br[cy][bb][bc]=1;r.toString()==br.toString()&&(d('bp','[CLEAR]'),setTimeout('b_()',5000))},
+        bg=function(cz,bh,bi){bf?(bd[cz][bh][bi]&&ap(cz,bh,bi)):ad(cz,bh,bi)},
+        bj=function(c$,bk,bl){bd[c$][bk][bl]?bg(c$,bk,bl):bm(c$,bk,bl)},
+        bm=function(c_,bn,bo){[bs(c_-1,bn-1,bo-1),bs(c_-1,bn-1,bo),bs(c_-1,bn-1,bo+1),bs(c_-1,bn,bo-1),bs(c_-1,bn,bo),bs(c_-1,bn,bo+1),bs(c_-1,bn+1,bo-1),bs(c_-1,bn+1,bo),bs(c_-1,bn+1,bo+1),bs(c_,bn-1,bo-1),bs(c_,bn-1,bo),bs(c_,bn-1,bo+1),bs(c_,bn,bo-1),bs(c_,bn,bo+1),bs(c_,bn+1,bo-1),bs(c_,bn+1,bo),bs(c_,bn+1,bo+1),bs(c_+1,bn-1,bo-1),bs(c_+1,bn-1,bo),bs(c_+1,bn-1,bo+1),bs(c_+1,bn,bo-1),bs(c_+1,bn,bo),bs(c_+1,bn,bo+1),bs(c_+1,bn+1,bo-1),bs(c_+1,bn+1,bo),bs(c_+1,bn+1,bo+1)].toString()==[as(c_-1,bn-1,bo-1),as(c_-1,bn-1,bo),as(c_-1,bn-1,bo+1),as(c_-1,bn,bo-1),as(c_-1,bn,bo),as(c_-1,bn,bo+1),as(c_-1,bn+1,bo-1),as(c_-1,bn+1,bo),as(c_-1,bn+1,bo+1),as(c_,bn-1,bo-1),as(c_,bn-1,bo),as(c_,bn-1,bo+1),as(c_,bn,bo-1),as(c_,bn,bo+1),as(c_,bn+1,bo-1),as(c_,bn+1,bo),as(c_,bn+1,bo+1),as(c_+1,bn-1,bo-1),as(c_+1,bn-1,bo),as(c_+1,bn-1,bo+1),as(c_+1,bn,bo-1),as(c_+1,bn,bo),as(c_+1,bn,bo+1),as(c_+1,bn+1,bo-1),as(c_+1,bn+1,bo),as(c_+1,bn+1,bo+1)].toString()&&(av(c_-1,bn-1,bo-1),av(c_-1,bn-1,bo),av(c_-1,bn-1,bo+1),av(c_-1,bn,bo-1),av(c_-1,bn,bo),av(c_-1,bn,bo+1),av(c_-1,bn+1,bo-1),av(c_-1,bn+1,bo),av(c_-1,bn+1,bo+1),av(c_,bn-1,bo-1),av(c_,bn-1,bo),av(c_,bn-1,bo+1),av(c_,bn,bo-1),av(c_,bn,bo+1),av(c_,bn+1,bo-1),av(c_,bn+1,bo),av(c_,bn+1,bo+1),av(c_+1,bn-1,bo-1),av(c_+1,bn-1,bo),av(c_+1,bn-1,bo+1),av(c_+1,bn,bo-1),av(c_+1,bn,bo),av(c_+1,bn,bo+1),av(c_+1,bn+1,bo-1),av(c_+1,bn+1,bo),av(c_+1,bn+1,bo+1))},
+        bs=(da,bt,bu)=>(bt<0||bt>=ab||bu<0||bu>=ac||da<0||da>=cg)?0:br[da][bt][bu],
+        bx=by=>by<3?((by+2)*(by+3)):(by-1)*15,bz=b$=>b$<3?[12,120,700][b$]:((b$-1)*(b$-1)*(b$-1)*600-50),
+        b_=function(){k(bx(bw),bx(bw),bx(bw),bz(bw));d('ca',cb(bw));for(var di=0;di<bw;di++)g('a'+di,'width',50*bx(bw)+"px");db(de,0);de=0;bw++},
+        cb=cc=>cc<11?['Easy','Intermediate','Hard','Very hard','Extra hard','So hard that your brain breaks down','Crazy','Extremely hard','Impossible for fools like you to solve','Impossible for even experts to solve','If you are seeing this, you should know better than to continue solving'][cc]:`Level ${cc-10}`;
+        db=function(dc,dd){g('a'+dc,'style','display:none');g('a'+dd,'style','display:block');d('dh',dd+1)},
+        df=function(){de==cg-1||(db(de,de+1),de++)},
+        dg=function(){de==0||(db(de,de-1),de--)},
+        b_();
+    </script>
+</body>
+</html>
