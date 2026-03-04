@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+body {
+font-family: sans-serif;
+}
+a {
+color: #f68b1e;
+}
+td {
+text-align: center;
+}
+#r_0,#r_1,#r_2,#r_3,#r_4{
+font-size: 40px;
+height: 50px;
+width: 50px;
+background:#efefef;
+border: #181818 4px solid;
+border-radius: 12px;
+padding:10px;
+}
+.a_1 {
+font-size: 40px;
+height: 50px;
+width: 50px;
+background:#dfdfff;
+border: #1818ff 4px solid;
+border-radius: 50px;
+}
+.a_2 {
+font-size: 40px;
+}
+.a_3 {
+font-size: 20px;
+background:#f68b1e;
+color: white;
+border: #ee1306 4px solid;
+border-radius: 8px;
+}
+.a_4 {
+font-size: 40px;
+height: 50px;
+width: 50px;
+background:#dfffdf;
+border: #18ff18 4px solid;
+border-radius: 50px;
+}
+.a_5 {
+font-size: 40px;
+height: 50px;
+width: 50px;
+background:#ffdfff;
+border: #ff18ff 4px solid;
+border-radius: 50px;
+}
+</style>
+</head>
+<body>
+<table>
+<table><tr><td id="r_0">Y</td><td id="r_1">A</td><td id="r_2">C</td><td id="r_3">H</td><td id="r_4">T</td><td id="r_5" class="a_2">!</td></tr></table>
+<p id="r_">Set players and START. <br>
+0 / 13 (<input type="button" value="START" onclick="e();">)</p>
+<table id="t" border="1" style="border-collapse: collapse"></table>
+<script>
+var h=0;
+var o=-1;
+var p=[];
+var q=[];
+var t=[0,0,0,0,0];
+var ac=[true,true,true,true,true];
+var ar=0;
+var av=[true,true,true,true,true,true];
+var ax=[true,true,true,true,true,true,true];
+function bd(be,bf,bg){
+document.getElementById(`r${be}_${bf}`).setAttribute('class','a_'+bg);
+}
+function a(b){
+var c="<tr>";
+for(var d=1;d<=b;d++){
+c+=`<td>#${d}</td>`;
+}
+c+=`<td class="a_3"><a onclick="a(${b+1});">+</a></td></tr>`;
+h=b;
+p[b-1]=0;
+q[b-1]=0;
+document.getElementById("t").innerHTML=c;
+}
+function k(l,m,n){
+document.getElementById(`r${l}_${m}`).innerHTML=n;
+}
+function as(at,au){
+return document.getElementById(`r${at}_${au}`).innerHTML.length==0;
+}
+function s(){
+o+=1;
+if(o==h){
+o=0;
+ar+=1;
+}
+if(ar==13){
+var bb=0;
+var bc=[];
+for(var r=0;r<h;r++){
+if(p[r]+q[r]>=bb){
+if(p[r]+q[r]==bb){
+bc=bc.concat([r+1]);
+}else{
+bb=p[r]+q[r];
+bc=[r+1];
+}
+}
+}
+k('','',`Winner: Player ${bc.join(', ')}`);
+}else{
+t=[0,0,0,0,0];
+ac=[true,true,true,true,true];
+for(var r=0;r<6;r++){
+av[r]=as(o,r);
+}
+for(var r=0;r<7;r++){
+ax[r]=as(o,r+7);
+}
+k('','',`${ar+1} / 13 (Player ${o+1})`);
+k('',0,'?');
+k('',1,'?');
+k('',2,'?');
+k('',3,'?');
+k('',4,'?');
+k('',5,'<a onclick="u();">Roll</a>');
+bd('',5,1);
+}
+}
+function y(){
+ac=[true,true,true,true,true];
+for(var z=0;z<5;z++){
+k('',z,`<a onclick="aa(${z});">${t[z]}</a>`);
+}
+}
+function aa(ab){
+ac[ab]=false;
+k('',ab,t[ab]);
+}
+function u(){
+k('',5,'…');
+bd('',5,2);
+var v=[];
+for(var w=0;w<100;w++){
+v[w]=Math.floor(Math.random()*6+1);
+}
+var x=[Math.floor(Math.random()*3+8),Math.floor(Math.random()*3+5),3,0,0];
+x[4]=91-5*x[0]-4*x[1];
+x[3]=Math.floor(Math.random()*(x[4]-10-x[4]%2)/2+1);
+x[4]-=2*x[3];
+for(var w=0;w<x[0];w++){
+setTimeout(`k('',0,${v[5*w]});k('',1,${v[5*w+1]});k('',2,${v[5*w+2]});k('',3,${v[5*w+3]});k('',4,${v[5*w+4]});`,500+100*w);
+}
+for(var w=0;w<x[1];w++){
+setTimeout(`k('',1,${v[5*x[0]+4*w]});k('',2,${v[5*x[0]+4*w+1]});k('',3,${v[5*x[0]+4*w+2]});k('',4,${v[5*x[0]+4*w+3]});`,500+100*x[0]+100*w);
+}
+for(var w=0;w<x[2];w++){
+setTimeout(`k('',2,${v[5*x[0]+4*x[1]+3*w]});k('',3,${v[5*x[0]+4*x[1]+3*w+1]});k('',4,${v[5*x[0]+4*x[1]+3*w+2]});`,500+100*x[0]+100*x[1]+100*w);
+}
+for(var w=0;w<x[3];w++){
+setTimeout(`k('',3,${v[5*x[0]+4*x[1]+3*x[2]+2*w]});k('',4,${v[5*x[0]+4*x[1]+3*x[2]+2*w+1]});`,500+100*x[0]+100*x[1]+100*x[2]+100*w);
+}
+for(var w=0;w<x[4];w++){
+setTimeout(`k('',4,${v[5*x[0]+4*x[1]+3*x[2]+2*x[3]+w]});`,500+100*x[0]+100*x[1]+100*x[2]+100*x[3]+100*w);
+}
+t=[v[5*(x[0]-1)],v[5*x[0]+4*(x[1]-1)],v[5*x[0]+4*x[1]+3*(x[2]-1)],v[5*x[0]+4*x[1]+3*x[2]+2*(x[3]-1)],v[99]];
+setTimeout("bd('',5,4);k('',5,'<a onclick=\"ad();\">Roll</a>');y();al();",500+100*x[0]+100*x[1]+100*x[2]+100*x[3]+100*x[4]);
+}
+function al(){
+var am=[0,0,0,0,0,0];
+for(var an=0;an<5;an++){
+am[t[an]-1]+=1;
+}
+var ay=t[0]+t[1]+t[2]+t[3]+t[4];
+var az=0;
+var ba=0;
+for(var an=0;an<6;an++){
+if(av[an]){
+k(o,an,`<a onclick="ao(${an},${(an+1)*am[an]});">${(an+1)*am[an]}</a>`);
+}
+if(am[an]==0){
+ba=0;
+}
+if(am[an]==1){
+ba+=1;
+}
+if(am[an]==2){
+az+=2;
+ba+=1;
+}
+if(am[an]==3){
+az+=3;
+ba+=1;
+if(ax[1]){
+k(o,8,`<a onclick="ao(8,${ay});">${ay}</a>`);
+}
+}
+if(am[an]==4){
+ba+=1;
+if(ax[1]){
+k(o,8,`<a onclick="ao(8,${ay});">${ay}</a>`);
+}
+if(ax[2]){
+k(o,9,`<a onclick="ao(9,${ay});">${ay}</a>`);
+}
+}
+if(am[an]==5){
+az=5;
+ba+=1;
+if(ax[1]){
+k(o,8,`<a onclick="ao(8,${ay});">${ay}</a>`);
+}
+if(ax[2]){
+k(o,9,`<a onclick="ao(9,${ay});">${ay}</a>`);
+}
+if(ax[6]){
+k(o,13,`<a onclick="ao(13,50);">50</a>`);
+}
+}
+if(az==5){
+if(ax[3]){
+k(o,10,`<a onclick="ao(10,25);">25</a>`);
+}
+}
+if(ba==4){
+if(ax[4]){
+k(o,11,`<a onclick="ao(11,30);">30</a>`);
+}
+}
+if(ba==5){
+if(ax[4]){
+k(o,11,`<a onclick="ao(11,30);">30</a>`);
+}
+if(ax[5]){
+k(o,12,`<a onclick="ao(12,40);">40</a>`);
+}
+}
+}
+if(ax[0]){
+k(o,7,`<a onclick="ao(7,${ay});">${ay}</a>`);
+}
+for(var an=8;an<14;an++){
+if(as(o,an)){
+k(o,an,`<a onclick="ao(${an},0);">0</a>`);
+}
+}
+}
+function ao(ap,aq){
+k(o,ap,aq);
+if(ap<6){
+av[ap]=false;
+if(p[o]>=63){
+p[o]-=35;
+}
+p[o]+=aq;
+if(p[o]>=63){
+p[o]+=35;
+k(o,6,35);
+}
+}else{
+ax[ap-7]=false;
+q[o]+=aq;
+}
+for(var aw=0;aw<6;aw++){
+if(av[aw]){
+k(o,aw,'');
+}
+}
+for(var aw=0;aw<7;aw++){
+if(ax[aw]){
+k(o,aw+7,'');
+}
+}
+k(o,14,p[o]+q[o]);
+s();
+}
+function e(){
+var f="<tr><td>Hand</td>";
+for(var g=1;g<=h;g++){
+f+=`<td>#${g}</td>`;
+}
+f+="</tr>";
+i=["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Bonus", "Choice", "3Dice", "4Dice", "Full House", "S.Straight", "B.Straight", "Yacht", "Total"];
+for(var g=0;g<15;g++){
+f+=`<tr><td>${i[g]}</td>`;
+for(var j=0;j<h;j++){
+f+=`<td id="r${j}_${g}"></td>`;
+}
+f+="</tr>";
+}
+document.getElementById("t").innerHTML=f;
+for(var g=0;g<h;g++){
+k(g,6,0);
+k(g,14,0);
+}
+s();
+}
+function ad(){
+k('',5,'…');
+bd('',5,2);
+for(var ae=0;ae<5;ae++){
+if(ac[ae]){
+k('',ae,'?');
+var af=Math.floor(Math.random()*4+4*ae+15);
+for(var ag=5;ag<=af;ag++){
+t[ae]=Math.floor(Math.random()*6+1);
+setTimeout(`k('',${ae},${t[ae]});`,ag*100);
+}
+}
+}
+setTimeout("bd('',5,5);k('',5,'<a onclick=\"ah();\">Roll</a>');y();al();",4000);
+}
+function ah(){
+k('',5,'…');
+bd('',5,2);
+for(var ai=0;ai<5;ai++){
+if(ac[ai]){
+k('',ai,'?');
+var aj=Math.floor(Math.random()*4+4*ai+15);
+for(var ak=5;ak<aj;ak++){
+t[ai]=Math.floor(Math.random()*6+1);
+setTimeout(`k('',${ai},${t[ai]});`,ak*100);
+}
+}
+}
+setTimeout("k('',5,'');al();",4000);
+}
+a(1);
+</script>
+</body>
+</html>
